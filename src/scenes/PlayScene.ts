@@ -20,7 +20,6 @@ class PlayScene extends Phaser.Scene {
         this.startTrigger = this.physics.add.sprite(0, 10, null)
             .setAlpha(0)
             .setOrigin(0, 1);
-        this.registerPlayerControl();
 
         this.physics.add.overlap(this.startTrigger, this.player, () => {
             console.log('collision');
@@ -36,14 +35,6 @@ class PlayScene extends Phaser.Scene {
 
     createPlayer() {
         this.player = new Player(this, 0, this.gameHeight, 'dino');
-    }
-
-    registerPlayerControl() {
-        const spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        spaceBar.on('down', () => {
-            this.player.setVelocityY(-1600);
-            
-        })
     }
 }
 

@@ -1,19 +1,12 @@
 import Phaser from "phaser";
 import { SpriteWithDynamicBody } from "../types";
 import { Player } from "../entities/Player";
+import { GameScene } from "./GameScene";
 
-class PlayScene extends Phaser.Scene {
+class PlayScene extends GameScene {
     player: Player;
     ground: Phaser.GameObjects.TileSprite;
     startTrigger: SpriteWithDynamicBody;
-
-    get gameHeight() {
-        return this.game.config.height as number;
-    }
-
-    get gameWidth() {
-        return this.game.config.width as number;
-    }
 
     constructor() {
         super('PlayScene');
@@ -46,6 +39,7 @@ class PlayScene extends Phaser.Scene {
                         rollOutEvent.remove();
                         this.ground.width = this.gameWidth;
                         this.player.setVelocityX(0);
+                        this.isGameRunning = true;
                     }
                 }
             })
@@ -59,7 +53,7 @@ class PlayScene extends Phaser.Scene {
     }
 
     createPlayer() {
-        this.player = new Player(this, 0, this.gameHeight, 'dino');
+        this.player = new Player(this, 0, this.gameHeight);
     }
 
     update(time: number, delta: number): void {
